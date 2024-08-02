@@ -3465,7 +3465,9 @@ impl<T> [T] {
     /// ```
     #[stable(feature = "slice_rotate", since = "1.26.0")]
     pub fn rotate_right(&mut self, k: usize) {
-        assert!(k <= self.len());
+        if (k > self.len()) {
+            k = k % self.len()
+        };
         let mid = self.len() - k;
         let p = self.as_mut_ptr();
 
